@@ -71,6 +71,7 @@ const loader = ({ url, internalUrl }) => (path, definition) => {
  * @return {Object} Epoch client
  * @example Epoch({url: 'https://sdk-testnet.aepps.com'})
  */
+
 const Epoch = stampit({
   async init ({ url = this.url, internalUrl = this.internalUrl }) {
     url = url.replace(/\/?$/, '/')
