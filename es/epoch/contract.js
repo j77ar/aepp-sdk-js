@@ -25,7 +25,6 @@
  */
 
 import * as R from 'ramda'
-import ContractBase from '../contract'
 import Epoch from '.'
 
 const TYPE_CHECKED_ABI = ['sophia', 'sophia-address']
@@ -72,7 +71,7 @@ async function getContractByteCode (contractId) {
   return this.api.getContractCode(contractId)
 }
 
-const EpochContract = ContractBase.compose(Epoch, {
+const EpochContract = Epoch.compose({
   methods: {
     contractEpochEncodeCallData,
     contractEpochCall,

@@ -24,7 +24,6 @@
  * @example import Selector from '@aeternity/aepp-sdk/es/oracle/epoch'
  */
 
-import OracleBase from '../oracle'
 import Epoch from '.'
 
 async function getOracle (oracleId) {
@@ -39,7 +38,7 @@ async function getOracleQuery (oracleId, queryId) {
   return this.api.getOracleQueryByPubkeyAndQueryId(oracleId, queryId)
 }
 
-const EpochOracle = OracleBase.compose(Epoch, {
+const EpochOracle = Epoch.compose({
   methods: {
     getOracle,
     getOracleQueries,
