@@ -29,6 +29,7 @@
 import Ae from './'
 import * as R from 'ramda'
 import { decodeBase64Check } from '../utils/crypto'
+import EpochOracle from '../epoch/oracle'
 
 /**
  * Constructor for Oracle Object (helper object for using Oracle)
@@ -214,7 +215,7 @@ async function respondToQuery (oracleId, queryId, response, options = {}) {
  * @param {Object} [options={}] - Initializer object
  * @return {Object} Oracle instance
  */
-const Oracle = Ae.compose({
+const Oracle = Ae.compose(EpochOracle, {
   methods: {
     registerOracle,
     respondToQuery,

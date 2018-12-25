@@ -52,7 +52,7 @@ function exec (infile, fn, args) {
   Ae({ url: program.host, debug: program.debug, process }).then(ae => {
     return ae.contractCompile(code)
     // Invoking `deploy` on the bytecode object will result in the contract
-    // being written to the chain, once the block has been mined.
+    // being written to the epoch, once the block has been mined.
     // Sophia contracts always have an `init` method which needs to be invoked,
     // even when the contract's `state` is `unit` (`()`). The arguments to
     // `init` have to be provided at deployment time and will be written to the

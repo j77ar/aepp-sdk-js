@@ -31,6 +31,7 @@
 import Ae from './'
 import * as R from 'ramda'
 import { addressFromDecimal } from '../utils/crypto'
+import EpochContract from '../epoch/contract'
 
 async function encodeCall (code, abi, name, args, call) {
   return this.contractEpochEncodeCallData(code, abi, name, args, call)
@@ -109,7 +110,7 @@ async function compile (code, options = {}) {
   }, o))
 }
 
-const Contract = Ae.compose({
+const Contract = Ae.compose(EpochContract, {
   methods: {
     contractCompile: compile,
     contractCallStatic: callStatic,

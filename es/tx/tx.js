@@ -173,7 +173,7 @@ async function oracleRespondTx ({ oracleId, callerId, responseTtl, queryId, resp
 }
 
 /**
- * Compute the absolute ttl by adding the ttl to the current height of the chain
+ * Compute the absolute ttl by adding the ttl to the current height of the epoch
  *
  * @param {number} relativeTtl
  * @return {number} Absolute Ttl

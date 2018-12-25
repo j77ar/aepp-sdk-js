@@ -25,8 +25,8 @@
  */
 
 import * as R from 'ramda'
-import ContractBase from './'
-import Epoch from '../epoch'
+import ContractBase from '../contract'
+import Epoch from '.'
 
 const TYPE_CHECKED_ABI = ['sophia', 'sophia-address']
 

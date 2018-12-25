@@ -24,8 +24,8 @@
  * @example import Selector from '@aeternity/aepp-sdk/es/oracle/epoch'
  */
 
-import OracleBase from './'
-import Epoch from '../epoch'
+import OracleBase from '../oracle'
+import Epoch from '.'
 
 async function getOracle (oracleId) {
   return this.api.getOracleByPubkey(oracleId)

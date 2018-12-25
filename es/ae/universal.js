@@ -24,12 +24,12 @@
 
 import Ae from './'
 import Account from '../account/memory'
-import Chain from '../chain/epoch'
+import Chain from '../epoch/chain'
 import Aens from './aens'
 import Contract from './contract'
 import Transaction from '../tx/tx'
-import EpochContract from '../contract/epoch'
-import EpochOracle from '../oracle/epoch'
+import EpochContract from '../epoch/contract'
+import EpochOracle from '../epoch/oracle'
 import Oracle from './oracle'
 
 /**

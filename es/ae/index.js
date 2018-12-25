@@ -24,14 +24,12 @@
 
 import stampit from '@stamp/it'
 import Tx from '../tx'
-import Chain from '../chain'
+import Chain from '../epoch'
 import Account from '../account'
-import Contract from '../contract'
-import Oracle from '../oracle'
 import * as R from 'ramda'
 
 /**
- * Sign and post a transaction to the chain
+ * Sign and post a transaction to the epoch
  * @instance
  * @category async
  * @rtype (tx: String, options: Object) => Promise[String]
@@ -70,9 +68,9 @@ async function spend (amount, recipientId, options = {}) {
  * Ae objects are the composition of three basic building blocks:
  * * {@link module:@aeternity/aepp-sdk/es/tx--Tx}
  * * {@link module:@aeternity/aepp-sdk/es/account--Account}
- * * {@link module:@aeternity/aepp-sdk/es/chain--Chain}
+ * * {@link module:@aeternity/aepp-sdk/es/epoch--Chain}
  * Only by providing the joint functionality of those three, most more advanced
- * operations, i.e. the ones with actual use value on the chain, become
+ * operations, i.e. the ones with actual use value on the epoch, become
  * available.
  * @function
  * @alias module:@aeternity/aepp-sdk/es/ae
@@ -80,7 +78,7 @@ async function spend (amount, recipientId, options = {}) {
  * @param {Object} [options={}] - Initializer object
  * @return {Object} Ae instance
  */
-const Ae = stampit(Tx, Account, Chain, Contract, Oracle, {
+const Ae = stampit(Tx, Account, Chain, {
   methods: { send, spend },
   deepProperties: { Ae: { defaults: {
     ttl: 0,

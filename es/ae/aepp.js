@@ -26,6 +26,7 @@ import Ae from './'
 import Aens from './aens'
 import Contract from './contract'
 import Rpc from '../rpc/client'
+import Oracle from './oracle'
 
 /**
  * Aepp Stamp
@@ -39,6 +40,6 @@ import Rpc from '../rpc/client'
  * @param {Object} [options={}] - Initializer object
  * @return {Object} Aepp instance
  */
-const Aepp = Ae.compose(Contract, Aens, Rpc)
+const Aepp = Ae.compose(Contract, Aens, Oracle, Rpc)
 
 export default Aepp

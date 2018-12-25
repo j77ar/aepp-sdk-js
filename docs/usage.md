@@ -245,7 +245,7 @@ Example spend function, using the SDK, talking directly to the API:
 ```js
   // Import necessary Modules
   import Tx from '@aeternity/aepp-sdk/es/tx/tx.js'
-  import Chain from '@aeternity/aepp-sdk/es/chain/epoch.js'
+  import Chain from '@aeternity/aepp-sdk/es/chain/chain.js'
   import Account from '@aeternity/aepp-sdk/es/account/memory.js'
 
   async function spend (amount, receiver_pub_key) {

@@ -24,22 +24,21 @@
 
 import Ae from './'
 import Account from '../account'
-import ContractBase from '../contract'
 import Contract from './contract'
 import Accounts from '../accounts'
-import Chain from '../chain/epoch'
+import Chain from '../epoch/chain'
 import Rpc from '../rpc/server'
 import Selector from '../account/selector'
 import * as R from 'ramda'
 import Tx from '../tx/tx'
-import EpochContract from '../contract/epoch'
-import EpochOracle from '../oracle/epoch'
+import EpochContract from '../epoch/contract'
+import EpochOracle from '../epoch/oracle'
 
 const contains = R.flip(R.contains)
 const isTxMethod = contains(Tx.compose.deepConfiguration.Ae.methods)
 const isChainMethod = contains(Chain.compose.deepConfiguration.Ae.methods)
 const isAccountMethod = contains(Account.compose.deepConfiguration.Ae.methods)
-const isContractMethod = contains(ContractBase.compose.deepConfiguration.Contract.methods)
+const isContractMethod = contains(Chain.compose.deepConfiguration.Contract.methods)
 const handlers = [
   { pred: isTxMethod, handler: 'onTx', error: 'Creating transaction [{}] rejected' },
   { pred: isChainMethod, handler: 'onChain', error: 'Chain operation [{}] rejected' },

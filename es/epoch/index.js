@@ -17,9 +17,9 @@
 
 /**
  * Chain module
- * @module @aeternity/aepp-sdk/es/chain
+ * @module @aeternity/aepp-sdk/es/epoch
  * @export Chain
- * @example import Chain from '@aeternity/aepp-sdk/es/chain'
+ * @example import Chain from '@aeternity/aepp-sdk/es/epoch'
  */
 
 import stampit from '@stamp/it'
@@ -31,7 +31,7 @@ import { required } from '@stamp/required'
  * Attempting to create instances from the Stamp without overwriting all
  * abstract methods using composition will result in an exception.
  * @function
- * @alias module:@aeternity/aepp-sdk/es/chain
+ * @alias module:@aeternity/aepp-sdk/es/epoch
  * @rtype Stamp
  * @param {Object} [options={}] - Initializer object
  * @return {Object} Chain instance
@@ -40,10 +40,28 @@ const Chain = stampit({
   deepProps: { Chain: { defaults: { waitMined: true } } },
   statics: { waitMined (bool) { return this.deepProps({ Chain: { defaults: { waitMined: bool } } }) } },
   deepConf: {
+    Contract: {
+      methods: [
+        'contractEpochEncodeCallData',
+        'contractEpochCall',
+        'contractEpochDecodeData',
+        'compileEpochContract'
+      ]
+    },
     Ae: {
       methods: [
-        'sendTransaction', 'height', 'awaitHeight', 'poll', 'balance', 'tx',
-        'mempool', 'topBlock', 'getTxInfo'
+        'sendTransaction',
+        'height',
+        'awaitHeight',
+        'poll',
+        'balance',
+        'tx',
+        'mempool',
+        'topBlock',
+        'getTxInfo',
+        'getOracle',
+        'getOracleQueries',
+        'getOracleQuery'
       ]
     }
   }
@@ -83,26 +101,26 @@ const Chain = stampit({
  */
 
 /**
- * Obtain current height of the chain
+ * Obtain current height of the epoch
  * @function height
  * @instance
  * @abstract
  * @category async
  * @rtype () => height: Number
- * @return {Number} Current chain height
+ * @return {Number} Current epoch height
  */
 
 /**
- * Wait for the chain to reach a specific height
+ * Wait for the epoch to reach a specific height
  * @function awaitHeight
  * @instance
  * @abstract
  * @category async
  * @rtype (height: Number, options?: Object) => height: Number
  * @param {Object} [options={}] - Options
- * @param {Number} options.interval - Interval (in ms) at which to poll the chain
+ * @param {Number} options.interval - Interval (in ms) at which to poll the epoch
  * @param {Number} options.attempts - Number of polling attempts after which to fail
- * @return {Number} Current chain height
+ * @return {Number} Current epoch height
  */
 
 /**
@@ -113,7 +131,7 @@ const Chain = stampit({
  * @category async
  * @rtype (th: String, options?: Object) => tx: Object
  * @param {Object} [options={}] - Options
- * @param {Number} options.interval - Interval (in ms) at which to poll the chain
+ * @param {Number} options.interval - Interval (in ms) at which to poll the epoch
  * @param {Number} options.blocks - Number of blocks mined after which to fail
  * @return {Object} The transaction as it was mined
  */
@@ -127,7 +145,7 @@ const Chain = stampit({
  * @rtype (address: String, options?: Object) => balance: Number
  * @param {String} address - The public account address to obtain the balance for
  * @param {Object} [options={}] - Options
- * @param {Number} options.height - The chain height at which to obtain the balance for (default: top of chain)
+ * @param {Number} options.height - The epoch height at which to obtain the balance for (default: top of epoch)
  * @param {String} options.hash - TODO
  * @return {Object} The transaction as it was mined
  */
