@@ -23,7 +23,7 @@ const DERIVED_KEY_FUNCTIONS = {
 }
 
 async function deriveKeyUsingArgon2id (password, salt, options) {
-  const { memlimit_kib: memoryCost, parallelism ,  opslimit: timeCost } = options.kdf_params
+  const { memlimit_kib: memoryCost, parallelism, opslimit: timeCost } = options.kdf_params
   return argon2.hash(password, { timeCost, memoryCost, parallelism, type: argon2.argon2id, raw: true, salt })
 }
 
@@ -113,7 +113,10 @@ function decrypt (ciphertext, key, nonce, algo) {
  * @param {Object=} options.kdf_params KDF parameters (default: DEFAULTS.crypto.kdf_params).
  * @return {buffer} Secret key derived from password.
  */
-async function deriveKey (password, nonce, options = { kdf_params: DEFAULTS.crypto.kdf_params, kdf: DEFAULTS.crypto.kdf }) {
+async function deriveKey (password, nonce, options = {
+  kdf_params: DEFAULTS.crypto.kdf_params,
+  kdf: DEFAULTS.crypto.kdf
+}) {
   if (typeof password === 'undefined' || password === null || !nonce) {
     throw new Error('Must provide password and nonce to derive a key')
   }
@@ -140,14 +143,15 @@ function marshal (name, derivedKey, privateKey, nonce, salt, options = {}) {
   const opt = Object.assign({}, DEFAULTS.crypto, options)
   return Object.assign(
     { name, version: 1, public_key: getAddressFromPriv(privateKey), id: uuid.v4() },
-    { crypto: Object.assign(
-      {
-        secret_type: opt.secret_type,
-        symmetric_alg: opt.symmetric_alg,
-        ciphertext: Buffer.from(encrypt(Buffer.from(privateKey), derivedKey, nonce, opt.symmetric_alg)).toString('hex'),
-        cipher_params: { nonce: Buffer.from(nonce).toString('hex') }
-      },
-      { kdf: opt.kdf, kdf_params: { ...opt.kdf_params, salt: Buffer.from(salt).toString('hex') }}
+    {
+      crypto: Object.assign(
+        {
+          secret_type: opt.secret_type,
+          symmetric_alg: opt.symmetric_alg,
+          ciphertext: Buffer.from(encrypt(Buffer.from(privateKey), derivedKey, nonce, opt.symmetric_alg)).toString('hex'),
+          cipher_params: { nonce: Buffer.from(nonce).toString('hex') }
+        },
+        { kdf: opt.kdf, kdf_params: { ...opt.kdf_params, salt: Buffer.from(salt).toString('hex') } }
       )
     }
   )
