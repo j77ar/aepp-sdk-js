@@ -1,5 +1,5 @@
 import nacl from 'tweetnacl'
-import * as argon2 from 'argon2'
+import * as argon2 from 'argon2-browser'
 import uuid from 'uuid'
 
 import { encodeBase58Check } from './crypto'
